@@ -14,7 +14,7 @@ const elementPosition =
  * A function to make elements draggable.
  * @param draggable element to be made draggable
  */
-function makeDraggable(draggable:HTMLElement)
+export function makeDraggable(draggable:HTMLElement)
 {
     console.log('*** make draggable called ***')
     //prep element for draggging

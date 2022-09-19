@@ -1,4 +1,3 @@
-"use strict";
 const clickPosition = {
     x: -1,
     y: -1
@@ -11,7 +10,7 @@ const elementPosition = {
  * A function to make elements draggable.
  * @param draggable element to be made draggable
  */
-function makeDraggable(draggable) {
+export function makeDraggable(draggable) {
     console.log('*** make draggable called ***');
     //prep element for draggging
     draggable.style.cursor = "move";
