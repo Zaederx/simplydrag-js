@@ -1,3 +1,4 @@
+see the npm package at [link](https://www.npmjs.com/package/simplydrag-js)
 # Usage
 
 Install the package:
