@@ -1,0 +1,17 @@
+{
+  "name": "simplydrag-js",
+  "version": "1.1.1",
+  "description": "A library for making html objects dragable",
+  "main": "js/simplydrag.js",
+  "types": "js/simplydrag.d.ts",
+  "scripts": {
+  },
+  "keywords": [
+    "drag",
+    "draggable",
+    "html",
+    "js"
+  ],
+  "author": "Zachaary Ishmael",
+  "license": "GPL-3.0-or-later"
+}
