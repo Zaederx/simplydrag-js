@@ -24,7 +24,7 @@ export function makeDraggable(draggable, opts) {
     //get options
     const { position, cursor, dataAttributeName, parentElement } = opts;
     //prep element for draggging
-    cursor ? draggable.style.cursor = cursor : draggable.style.cursor = 'nwse-resize';
+    cursor ? draggable.style.cursor = cursor : draggable.style.cursor = 'move';
     position ? draggable.style.position = position : draggable.style.position = 'absolute';
     draggable.setAttribute('draggable', 'false'); //not that kind of default draggable
     var x = draggable.getBoundingClientRect().x;
@@ -33,7 +33,7 @@ export function makeDraggable(draggable, opts) {
         //set data x and data y attributes
         var dataXName = `data-${dataAttributeName}-x`;
         var dataYName = `data-${dataAttributeName}-y`;
-        setDataXY(parentElement, draggable, x, y, { dataXName, dataYName });
+        setDataXY(parentElement, draggable, { dataXName, dataYName });
         //set those to then be updated as coorindates change
         watchCoordinates(parentElement, draggable, dataAttributeName);
     }
@@ -44,7 +44,7 @@ export function makeDraggable(draggable, opts) {
         draggable.setAttribute('data-y', String(y));
     }
     else if (dataAttributeName) {
-        console.log('Parent element not set. Please ensure that you set the parentElement if you intend to use the parent element relative position data attributes.');
+        console.warn('Parent element not set. Please ensure that you set the parentElement if you intend to use the parent element relative position data attributes.');
     }
     //while mouse is down on element
     draggable.onmousedown = (e) => {
@@ -80,14 +80,10 @@ function watchCoordinates(parentElement, draggableNode, dataAttributeName) {
     // Callback function to execute when mutations are observed
     const callback = (mutationList, observer) => {
         mutationList.forEach(mutation => {
-            console.log('mutation:', mutation);
             //if there's a change in dataX or dataY
             if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
-                //get draggable element x and y
-                var x = draggableNode.getBoundingClientRect().x;
-                var y = draggableNode.getBoundingClientRect().y;
                 //set parent relative x and y
-                setDataXY(parentElement, draggableNode, Number(x), Number(y), { dataXName: dataXName, dataYName: dataYName });
+                setDataXY(parentElement, draggableNode, { dataXName: dataXName, dataYName: dataYName });
             }
         });
     };
@@ -103,7 +99,10 @@ function watchCoordinates(parentElement, draggableNode, dataAttributeName) {
  * @param x_drag the absolute / screen relative x coordinate of the draggable element
  * @param y_drag the absolute / screen relative y coordinate of the draggable element
  */
-function setDataXY(parentElement, draggableNode, x_drag, y_drag, coords) {
+function setDataXY(parentElement, draggableNode, coords) {
+    //get draggable element x and y
+    var x_drag = draggableNode.getBoundingClientRect().x;
+    var y_drag = draggableNode.getBoundingClientRect().y;
     console.log('x_drag:', x_drag, 'y_drag:', y_drag);
     //parent x and y coordinates
     var p_x = Number(parentElement.getBoundingClientRect().x);

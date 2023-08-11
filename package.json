@@ -1,6 +1,6 @@
 {
   "name": "simplydrag-js",
-  "version": "1.1.9",
+  "version": "1.2.1",
   "description": "A library for making html objects dragable",
   "main": "js/simplydrag.js",
   "types": "js/simplydrag.d.ts",
